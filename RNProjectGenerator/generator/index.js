@@ -102,8 +102,8 @@ module.exports = yeoman.generators.NamedBase.extend({
       return;
     }
 
-    var reactVersion = peerDependencies.react;
-    var reactNativeVersion = peerDependencies.rn
+    var reactVersion = peerDependencies.react || "latest";
+    var reactNativeVersion = peerDependencies.rn || "latest";
     if (!reactVersion) {
       return;
     }

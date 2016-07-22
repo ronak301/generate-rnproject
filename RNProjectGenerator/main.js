@@ -47,28 +47,4 @@ function installReactNative(projName) {
   fs.writeFileSync(path.join(process.cwd(), 'package.json'), JSON.stringify(packageJson));
 }
 
-function getInstallPackage(rnPackage) {
-  var packageToInstall = 'react-native';
-  var valideSemver = semver.valid(rnPackage);
-  if (valideSemver) {
-    packageToInstall += '@' + valideSemver;
-  } else if (rnPackage) {
-    // for tar.gz or alternative paths
-    packageToInstall = rnPackage;
-  }
-  return packageToInstall;
-}
-
-function run(root, projectName, rnPackage) {
-  exec('npm install --save --save-exact ' + getInstallPackage(rnPackage), function(e, stdout, stderr) {
-    if (e) {
-      console.log(stdout);
-      console.error(stderr);
-      console.error('`npm install --save --save-exact react-native` failed');
-      process.exit(1);
-    }
-  });
-}
-
-
 init(process.cwd() , process.argv[2]);
