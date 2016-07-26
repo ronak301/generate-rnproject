@@ -5,6 +5,7 @@ const path = require('path');
 const TerminalAdapter = require('yeoman-environment/lib/adapter.js');
 const fs = require('fs');
 const semver = require('semver');
+var exec = require('child_process').exec;
 
 class CreateSuppressingTerminalAdapter extends TerminalAdapter {
   constructor() {
@@ -31,20 +32,6 @@ function init(projDir, argsOrName) {
   const generator = env.create('react:app', {args: args});
   generator.destinationRoot(projDir);
   generator.run();
-  installReactNative(argsOrName);
-}
-
-function installReactNative(projName) {
-  var root = path.resolve(projName);
-  const packageJson = {
-    name: projName,
-    version: '0.0.1',
-    private: 'true',
-    scripts: {
-      start: 'node node_modules/react-native/local-cli/cli.js start'
-    }
-  };
-  fs.writeFileSync(path.join(process.cwd(), 'package.json'), JSON.stringify(packageJson));
 }
 
 init(process.cwd() , process.argv[2]);
