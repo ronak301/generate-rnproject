@@ -1,0 +1,1 @@
+run node ./RNProjectGenerator/main myProjectName
